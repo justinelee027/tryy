@@ -1,1 +1,167 @@
-hii guy
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Login Form</title>
+<style>
+  /* Reset and basic styles */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Container with subtle glass effect */
+  .login-container {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 15px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    width: 320px;
+    padding: 40px 30px;
+    color: #fff;
+  }
+
+  .login-container h2 {
+    margin-top: 0;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+  }
+
+  input[type="text"],
+  input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 25px;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    font-size: 1rem;
+    color: #333;
+    transition: box-shadow 0.3s ease;
+  }
+
+  input[type="text"]:focus,
+  input[type="password"]:focus {
+    box-shadow: 0 0 8px 3px #764ba2;
+  }
+
+  /* Password toggle icon container */
+  .password-wrapper {
+    position: relative;
+  }
+
+  .toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #764ba2;
+    font-size: 1.2rem;
+  }
+
+  button {
+    width: 100%;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 10px;
+    background: #764ba2;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background 0.25s ease;
+  }
+
+  button:hover {
+    background: #5e368e;
+  }
+
+  /* Responsive */
+  @media (max-width: 400px) {
+    .login-container {
+      width: 90%;
+      padding: 30px 20px;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="login-container" role="main" aria-label="Login form">
+    <h2>Log In</h2>
+    <form id="loginForm" aria-describedby="loginInfo">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" placeholder="Enter username" required aria-required="true" autocomplete="username" />
+      <label for="password">Password</label>
+      <div class="password-wrapper">
+        <input type="password" id="password" name="password" placeholder="Enter password" required aria-required="true" autocomplete="current-password" />
+        <span class="toggle-password" aria-label="Toggle password visibility" role="button" tabindex="0">👁️</span>
+      </div>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+<script>
+  // Toggle password visibility
+  const passwordInput = document.getElementById('password');
+  const toggleBtn = document.querySelector('.toggle-password');
+
+  toggleBtn.addEventListener('click', () => {
+    const type = passwordInput.getAttribute('type');
+    if (type === 'password') {
+      passwordInput.setAttribute('type', 'text');
+      toggleBtn.textContent = '🙈';
+    } else {
+      passwordInput.setAttribute('type', 'password');
+      toggleBtn.textContent = '👁️';
+    }
+  });
+  // Enable toggle by keyboard (Enter or Space)
+  toggleBtn.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleBtn.click();
+    }
+  });
+
+  // Simple client-side form validation and submission logging
+  const form = document.getElementById('loginForm');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const username = form.username.value.trim();
+    const password = form.password.value;
+    if (!username || !password) {
+      alert('Please fill in both username and password.');
+      return;
+    }
+    // For demo, just show an alert
+    alert(`Username: ${username}\nPassword: ${password}\n\nLogin successful (demo)`);
+    form.reset();
+  });
+</script>
+</body>
+</html>
+
